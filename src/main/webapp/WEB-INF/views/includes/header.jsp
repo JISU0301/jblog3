@@ -9,14 +9,12 @@
 				href="${pageContext.servletContext.contextPath }/user/auth">로그인</a></li>
 			<li><a
 				href="${pageContext.servletContext.contextPath }/user/join">회원가입</a></li>
-			<li><a
-				href="${pageContext.servletContext.contextPath }/${authUser.id }">내블로그</a></li>
 		</c:when>
 		<c:otherwise>
-			<li>${authUser.name }님안녕하세요^^;</li>
+			<li>${authUser.id }님안녕하세요^^;</li>
 			<li><a
 				href="${pageContext.servletContext.contextPath }/user/logout">로그아웃</a></li>
-			<li><a href="${pageContext.servletContext.contextPath }/${authUser.id }">내블로그</a></li>
+			<li><a href="${pageContext.servletContext.contextPath }/${authUser.id}">내블로그</a></li>
 
 		</c:otherwise>
 	</c:choose>
