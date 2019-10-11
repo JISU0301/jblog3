@@ -18,8 +18,15 @@ public class CategoryDao {
 		sqlSession.insert("category.defaultCategory",id);
 	}
 	
+
 	// 카테고리 목록 가져오기
 	public List<CategoryVo> getCategoryList(String id) {
 		return sqlSession.selectList("category.getCategoryList", id);
 	}
+
+
+	
+
+
+
 }
