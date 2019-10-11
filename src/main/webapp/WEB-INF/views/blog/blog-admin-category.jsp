@@ -8,6 +8,57 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<script
+	src="${pageContext.servletContext.contextPath }/assets/js/jquery/jquery-1.9.0.js"
+	type="text/javascript"></script>
+
+<script>
+
+$(function(){
+	getList(1);
+	$("#btn-submit-category").click(function() {
+		var name = $("#category-name").val();
+		var info = $("#category-info").val();
+		if(name == "" || info == "") {
+			alert("입력하세요");
+			return;
+		}
+		
+		var category = JSON.stringify({
+			"name" : name,
+			"info" : info
+		});
+
+
+		// ajax 통신
+		$.ajax({
+			url: "${pageContext.servletContext.contextPath }/api/category/add" ,
+			type: "post",
+			dataType: "json",
+			data: category,
+			contentType: "application/json;charset=UTF-8",
+			success: function(data, response){
+				if(response.result == "fail"){
+					console.error(response.message);
+					return;
+				}
+				
+					$("#category-name").val("");
+					$("#category-info").val("");
+					$("#category-name").focus();
+					getList(1);
+				},
+				error: function(xhr, error) {
+					console.error("error:"+error);
+				}
+	
+	});
+});
+	
+</script>
+
+
+
 </head>
 <body>
 	<div id="container">

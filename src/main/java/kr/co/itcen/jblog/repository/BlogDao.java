@@ -27,6 +27,8 @@ public class BlogDao {
 		sqlSession.update("blog.update", blogVo);
 		
 	}
+	
+	
 
 
 }

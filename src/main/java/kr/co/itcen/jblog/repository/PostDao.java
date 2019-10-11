@@ -30,4 +30,9 @@ public class PostDao {
 		return sqlSession.selectList("post.getPostList", categoryNo);
 	}
 
+	public void insert(PostVo postVo) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -25,6 +25,11 @@ public class CategoryDao {
 	}
 
 
+	public Boolean insert(CategoryVo categoryVo) {
+		return sqlSession.insert("category.insert",categoryVo)==1 ;
+	}
+
+
 	
 
 

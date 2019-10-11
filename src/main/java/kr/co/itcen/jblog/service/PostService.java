@@ -59,4 +59,10 @@ public class PostService {
 		
 		return mainList;
 	}
+
+
+	public void insert(PostVo postVo) {
+		postDao.insert(postVo);
+		
+	}
 }

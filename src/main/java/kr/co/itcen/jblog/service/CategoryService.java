@@ -19,4 +19,8 @@ public class CategoryService {
 		return list;
 	}
 
+	public Boolean add(CategoryVo categoryVo) {
+		return categoryDao.insert(categoryVo);
+	}
+
 }

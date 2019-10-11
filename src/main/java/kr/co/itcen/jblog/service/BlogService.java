@@ -28,6 +28,8 @@ import kr.co.itcen.jblog.vo.BlogVo;
 			blogDao.update(blogVo);
 			
 		}
+
+		
 		
 		
 

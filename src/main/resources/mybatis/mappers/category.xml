@@ -7,7 +7,7 @@
 	<insert id="defaultCategory" parameterType="String">
 		<![CDATA[
 		insert
-		  into category
+			into category
 		values (null, "미분류", "미분류", now(), #{blog_id})
 		]]>
 	</insert>
@@ -22,5 +22,13 @@
          where blog_id = #{blog_id}
 		]]>
 	</select>
-
+	
+	<!-- 카테고리 생성 -->
+	<insert id="insert" parameterType="categoryVo">
+		<![CDATA[
+			insert 
+				into category 
+			values (null, #{title }, #{contents }, now(), #{blog_id })
+		]]>
+	</insert>
 </mapper>

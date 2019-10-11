@@ -87,6 +87,8 @@ public class BlogController {
 		}
 		
 		if(admin_no == 3) {
+			//포스트작성
+			PostService.insert(postVo);
 			
 			return "blog/blog-admin-write";
 		}
