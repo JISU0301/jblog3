@@ -5,9 +5,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -88,11 +92,11 @@ public class BlogController {
 		
 		if(admin_no == 3) {
 			//포스트작성
-			PostService.insert(postVo);
-			
+			List<CategoryVo> categoryName = categoryService.getCategoryName(id);
+			model.addAttribute("categoryName", categoryName);
+
 			return "blog/blog-admin-write";
 		}
-		
 		
 		return "blog/blog-admin-basic";
 		
@@ -120,5 +124,31 @@ public class BlogController {
 		
 	}
 	
+	
+	@RequestMapping(value = "/postWrite", method = RequestMethod.POST)
+	public String postWrite(@PathVariable String id, @ModelAttribute @Valid PostVo postVo, BindingResult result,
+			Model model) {
 
+		if (result.hasErrors()) {
+			List<ObjectError> list = result.getAllErrors();
+			for (ObjectError error : list) {
+				System.out.println(error);
+			}
+
+			model.addAllAttributes(result.getModel());
+
+			List<CategoryVo> categoryName = categoryService.getCategoryName(id);
+			BlogVo blogVo = blogService.getInfo(id);
+
+			model.addAttribute("categoryName", categoryName);
+			model.addAttribute("admin_no", 3);
+			model.addAttribute("blogInfo", blogVo);
+
+			return "blog/blog-admin-write";
+		}
+		
+		// 포스트 작성
+				postService.postWrite(postVo);
+				return "redirect:/" + id;
+	}
 }

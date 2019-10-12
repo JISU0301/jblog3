@@ -24,11 +24,21 @@
 	</select>
 	
 	<!-- 카테고리 생성 -->
-	<insert id="insert" parameterType="categoryVo">
+	<insert id="insert" parameterType="categoryvo">
 		<![CDATA[
 			insert 
 				into category 
-			values (null, #{title }, #{contents }, now(), #{blog_id })
+			values (null, #{name }, #{contents }, now(), #{blog_id })
 		]]>
 	</insert>
+	
+	<!-- 카테고리명 가져오기 -->
+	<select id="getCategoryName" parameterType="string" resultType="categoryvo">
+		<![CDATA[
+		select no, name
+          from category
+         where blog_id = #{blog_id }
+		]]>
+	</select>
+	
 </mapper>

@@ -48,6 +48,12 @@ public class CategoryVo {
 		return "CategoryVo [no=" + no + ", name=" + name + ", contents=" + contents + ", regDate=" + regDate
 				+ ", blog_id=" + blog_id + ", postCount=" + postCount + "]";
 	}
+	public void defaultsetting(String id) {
+			this.name = "아이티센";
+			this.contents = "교육";
+			this.blog_id = blog_id;
+		}		
+	}
 	
-}
+
 	

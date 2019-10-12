@@ -60,9 +60,8 @@ public class PostService {
 		return mainList;
 	}
 
+	public void postWrite(PostVo postVo) {
+		postDao.postWrite(postVo);
 
-	public void insert(PostVo postVo) {
-		postDao.insert(postVo);
-		
 	}
 }

@@ -19,8 +19,23 @@ public class CategoryService {
 		return list;
 	}
 
-	public Boolean add(CategoryVo categoryVo) {
-		return categoryDao.insert(categoryVo);
+	public List<CategoryVo> add(CategoryVo categoryVo) {
+		categoryDao.add(categoryVo);
+
+		// 블로그 카테고리 목록 가져오기
+		return categoryDao.getCategoryList(categoryVo.getBlog_id());
+	}
+
+	
+	public List<CategoryVo> getCategoryName(String id) {
+		List<CategoryVo> categoryList = categoryDao.getCategoryName(id);
+		return categoryList;
 	}
 
 }
+
+	
+	
+	
+
+

@@ -1,11 +1,24 @@
 package kr.co.itcen.jblog.vo;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class PostVo {
+	
 	private Long no;
+	
+	@NotEmpty
+	@Length(min = 2, max = 50)
 	private String title;
+	
+	@NotEmpty
+	@Length(min = 2, max = 500)
 	private String contents;
+	
 	private String regDate;
+	
 	private Long categoryNo;
+	
 	private String id;
 
 	public Long getNo() {

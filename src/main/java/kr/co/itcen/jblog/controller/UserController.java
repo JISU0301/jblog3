@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.itcen.jblog.service.CategoryService;
 import kr.co.itcen.jblog.service.UserService;
 import kr.co.itcen.jblog.vo.UserVo;
 
@@ -22,6 +23,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
 
 	// 회원 가입
 	@RequestMapping(value = "/join", method = RequestMethod.GET)

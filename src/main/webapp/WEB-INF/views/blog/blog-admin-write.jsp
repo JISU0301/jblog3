@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!doctype html>
 <html>
@@ -11,21 +13,29 @@
 </head>
 <body>
 	<div id="container">
-			<c:import url="/WEB-INF/views/includes/blog.jsp" />
+			<c:import url="/WEB-INF/views/includes/blognav.jsp" />
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<c:import url="/WEB-INF/views/includes/blogmenu.jsp" />
-				<form action="${pageContext.request.contextPath}/blog/${authUser.id}/admin/write" method="post">
+				<form:form modelAttribute="postVo" action="${pageContext.servletContext.contextPath }/${authUser.id }/postWrite" method="post">
 			      	<table class="admin-cat-write">
 			      		<tr>
 			      			<td class="t">제목</td>
 			      			<td>
 			      				<input type="text" size="60" name="title">
-				      			<select name="category">
-				      				<c:forEach items="${list }" var="categoryvo">
-				      					<option value ="${categoryvo.no }">"${categoryvo.name }"</option>
-									</c:forEach>
+				      			<select name="categoryNo">
+				      				<c:forEach items="${categoryName }" var="vo" varStatus="status">
+				      					<option value="${vo.no }">${vo.name }</option>
+				      				</c:forEach>
 				      			</select>
+				      			<spring:hasBindErrors name="postVo">
+				 					<c:if test='${errors.hasFieldErrors("title") }'>
+										<p style="font-weight:bold; color:red; text-align:left; padding:0">
+					  					<spring:message 
+											code='${errors.getFieldError("title").codes[0] }' text='${errors.getFieldError("title").defaultMessage }' />
+										</p>
+			   						</c:if>
+								</spring:hasBindErrors>
 				      		</td>
 			      		</tr>
 			      		<tr>
@@ -37,7 +47,7 @@
 			      			<td class="s"><input type="submit" value="포스트하기"></td>
 			      		</tr>
 			      	</table>
-				</form>
+				</form:form>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/includes/footer.jsp" />

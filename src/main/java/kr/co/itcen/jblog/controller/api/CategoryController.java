@@ -1,19 +1,21 @@
 package kr.co.itcen.jblog.controller.api;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.itcen.jblog.dto.JSONResult;
 import kr.co.itcen.jblog.service.CategoryService;
 import kr.co.itcen.jblog.vo.CategoryVo;
-import kr.co.itcen.jblog.vo.UserVo;
 
-@Controller
+@Controller("categoryApiController")
 @RequestMapping("api/category")
 public class CategoryController {
 	
@@ -21,12 +23,9 @@ public class CategoryController {
 	private CategoryService categoryService;
 	
 	@ResponseBody
-	@RequestMapping("/add")
-	public JSONResult addCategory(@RequestBody CategoryVo categoryVo, HttpSession session) {
-		UserVo userVo = (UserVo)session.getAttribute("authUser");
-		categoryVo.setBlog_id(userVo.getId());
-		Boolean exist = categoryService.add(categoryVo);
-		
-		return JSONResult.success(exist);
-	}
+	@RequestMapping(value="/add", method=RequestMethod.POST)
+	public JSONResult addCategory(@ModelAttribute CategoryVo categoryVo, HttpSession session) {
+		List<CategoryVo> categoryList = categoryService.add(categoryVo);
+		return JSONResult.success(categoryList);
+		}
 }
